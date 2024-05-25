@@ -1,0 +1,145 @@
+{
+  "title": "Create Sale",
+  "logoPosition": "right",
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "contact",
+          "title": "Customer Name",
+          "isRequired": true
+        },
+        {
+          "type": "text",
+          "name": "due_date",
+          "title": "Order due date",
+          "isRequired": true,
+          "inputType": "datetime-local"
+        }
+      ],
+      "title": "Customer Details"
+    },
+    {
+      "name": "page2",
+      "elements": [
+        {
+          "type": "paneldynamic",
+          "name": "line_items",
+          "title": "Products",
+          "templateElements": [
+            {
+              "type": "text",
+              "name": "product",
+              "title": "Product name"
+            },
+
+            {
+              "type": "text",
+              "inputType": "number",
+              "name": "unit_price",
+              "title": "Unit price"
+            },
+            {
+              "type": "text",
+              "inputType": "number",
+              "name": "quantity",
+              "title": "Quantity"
+            },
+            {
+              "type": "text",
+              "name": "discount",
+              "title": "Discount"
+            },
+            {
+              "type": "expression",
+              "name": "line_item_subtotal",
+              "isVisible": "false",
+              "title": "Sub total",
+              "expression": "{panel.quantity} * {panel.unit_price}"
+            },
+            {
+              "type": "expression",
+              "name": "total_amount",
+              "title": "Total amount",
+              "expression": "{panel.unit_price} * {panel.quantity} - {panel.discount}",
+              "displayStyle": "decimal"
+            }
+          ]
+        }
+      ],
+      "title": "Add products to your sale"
+    },
+    {
+      "name": "page3",
+      "elements": [
+        {
+          "type": "expression",
+          "name": "subtotal",
+          "title": "Subtotal",
+          "expression": "sumInArray({line_items},'line_item_subtotal')"
+        },
+        {
+          "type": "expression",
+          "name": "sub_discount",
+          "title": "Discount",
+          "expression": "sumInArray({line_items},'discount')"
+        },
+        {
+          "type": "expression",
+          "name": "_total_amount",
+          "title": "Total amount",
+          "expression": "sumInArray({line_items},'total_amount')"
+        },
+        {
+            "type": "text",
+            "name": "note",
+            "title": "Add Note"
+        }
+      ],
+      "title": "Order Detail"
+    },
+    {
+      "name": "page4",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "payment_mode",
+          "title": "Payment mode",
+          "choices": [
+            {
+              "value": "cash",
+              "text": "Cash"
+            },
+            {
+              "value": "credit",
+              "text": "Credit"
+            },
+            {
+                "value": "mobile_money",
+                "text": "Mobile Money"
+            },
+            {
+                "value": "bank_transfer",
+                "text": "Bank Transfer"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "inputType": "number",
+          "name": "amount_paid",
+          "title": "Amount paid"
+        },
+        {
+          "type": "expression",
+          "name": "amount_due",
+          "title": "Amount due",
+          "expression": "{_total_amount} - {amount_paid}"
+        }
+      ],
+      "title": "Payment"
+    }
+  ]
+}
