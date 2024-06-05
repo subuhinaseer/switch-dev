@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: '#012E3C', paddingTop: 20},
   image: {
     // height: 306,
-    height: 406,
+    height: '50%',
     width: 254.69,
     alignSelf: 'center',
   },

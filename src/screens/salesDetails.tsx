@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import {Divider, IconButton} from 'react-native-paper';
+import { colors } from '~/theme';
 
 type DetailsProps = {
   customerName: string;
@@ -18,7 +19,7 @@ type DetailsProps = {
 const Paid = () => {
   return (
     <View style={styles.paidStyle}>
-      <Text style={{textAlign: 'center', color: '#FFFFFF'}}>Paid</Text>
+      <Text style={{textAlign: 'center', color: '#FFFFFF',fontWeight:'600'}}>Paid</Text>
     </View>
   );
 };
@@ -96,22 +97,24 @@ const Item = (props: ItemProps) => {
 
 const DetailsBox = (props: DetailsProps) => {
   return (
-    <View style={{margin: 20}}>
+    <View style={{margin: 12}}>
       <View
         style={{
           backgroundColor: '#2A677A',
           borderTopRightRadius: 15,
           borderTopLeftRadius: 15,
+          padding:10
         }}>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             padding: 10,
+            // paddingHorizontal:10
           }}>
           <View style={{flexDirection: 'row'}}>
             {Paid ? <Paid /> : <UnPaid />}
-            <View style={{marginHorizontal: 5}}>
+            <View style={{marginLeft:10}}>
               <Text style={styles.customerNameStyle}>{props.customerName}</Text>
               <Text style={styles.companyNameStyle}>{props.companyName}</Text>
             </View>
@@ -129,7 +132,8 @@ const DetailsBox = (props: DetailsProps) => {
           backgroundColor: '#012E3C',
           borderBottomRightRadius: 15,
           borderBottomLeftRadius: 15,
-          paddingBottom: 20,
+          paddingBottom: 10,
+          paddingHorizontal:10
         }}>
         <View
           style={{
@@ -193,7 +197,9 @@ const SalesDetails = ({navigation}: any) => {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          marginHorizontal: 20,
+          // marginHorizontal: 20,
+          backgroundColor:colors.background,
+          paddingVertical:10
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <IconButton
@@ -229,8 +235,8 @@ export default SalesDetails;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#01232D',
-    paddingTop: 20,
+    // backgroundColor: '#01232D',
+  //  paddingTop: 50,
   },
   salesDetailsStyle: {
     color: '#F6B100',
@@ -238,9 +244,12 @@ const styles = StyleSheet.create({
   },
   paidStyle: {
     backgroundColor: '#2BC871',
-    height: 18,
-    width: 39,
+    height: 20,
+    width: 44,
     borderRadius: 20,
+    alignItems:"center",
+    alignSelf:"center",
+    justifyContent:"center"
   },
   unpaidStyle: {
     backgroundColor: '#EA5455',

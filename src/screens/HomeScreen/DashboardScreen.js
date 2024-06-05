@@ -226,7 +226,7 @@ const DashboardScreen = ({ navigation }: any) => {
                     />
                     <Text
                       style={{
-                        color: '#F6B100',
+                        color: colors.backgroundColor2,
                         fontSize: 18,
                         paddingVertical: 0,
                         paddingHorizontal: 5,
@@ -248,7 +248,7 @@ const DashboardScreen = ({ navigation }: any) => {
                     />
                     <Text
                       style={{
-                        color: '#F6B100',
+                        color: colors.backgroundColor2,
                         fontSize: 18,
                         paddingVertical: 0,
                         paddingHorizontal: 5,
@@ -302,6 +302,7 @@ const DashboardScreen = ({ navigation }: any) => {
                   alignSelf: 'center',
                   fontSize: 14,
                   paddingVertical: 10,
+                  color:colors.grey
                 }}>
                 Looks like you're yet to add your first sale!
               </Text>
@@ -311,6 +312,7 @@ const DashboardScreen = ({ navigation }: any) => {
                   textAlign: 'center',
                   fontSize: 12,
                   paddingVertical: 20,
+                  color:colors.grey
                 }}>
                 Add your sales records to track transactions with ease
               </Text>
@@ -344,12 +346,14 @@ export default DashboardScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
   },
   container3: {
+    paddingTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: colors.primary,
+    backgroundColor: colors.background,
+    paddingBottom:10
+
   },
   avatar: {
     borderWidth: 2,
@@ -376,7 +380,8 @@ const styles = StyleSheet.create({
   },
   salesFigContainer: {
     borderWidth: 1,
-    borderColor: '#F6B100',
+    borderColor:colors.backgroundColor2,
+    // borderColor: '#F6B100',
     height: 140,
     width: 341,
     alignSelf: 'center',
@@ -402,6 +407,7 @@ const styles = StyleSheet.create({
   yourSalesText: {
     fontSize: 14,
     fontWeight: 'bold',
+    color:colors.grey
   },
   center: {alignItems: 'center'},
   createSalesButton: {
@@ -462,5 +468,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 50,
     right: 20,
+    // color:'#eee'
   },
 });

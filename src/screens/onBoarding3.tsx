@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   image: {
-    height: 406,
+    height: '50%',
     width: 254.69,
     alignSelf: 'center',
   },

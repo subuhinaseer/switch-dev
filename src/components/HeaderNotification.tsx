@@ -9,12 +9,13 @@ export default function HeaderNotification(props: any) {
   const navigation = useNavigation();
   const {title, right, showCancelButton = true} = props;
   return (
-    <View style={{backgroundColor: colors.primary}}>
+    <View style={{backgroundColor: colors.background}}>
       <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
           marginHorizontal: 10,
+          alignItems:"center"
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <IconButton

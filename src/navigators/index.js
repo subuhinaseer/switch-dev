@@ -27,6 +27,8 @@ import {useSelector} from 'react-redux';
 const Stack = createNativeStackNavigator();
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Notifications from '../screens/notifications';
+import SalesDetails from '../screens/salesDetails';
 export function AppNavigator() {
   const user = useSelector(e => e.user);
   console.log(user);
@@ -69,8 +71,10 @@ export function AppNavigator() {
       <Stack.Screen name="AddCustomer" component={AddCustomerScreen} />
       <Stack.Screen name="CustomerAdded" component={CustomerAdded} />
       <Stack.Screen name="SearchAssignment" component={SearchAssignment} />
+      <Stack.Screen name="Notifications" component={Notifications} />
       <Stack.Screen name="ProductsAdded" component={ProductsAdded} />
       <Stack.Screen name="ProductsAdded2" component={ProductsAdded2} />
+      <Stack.Screen name="SalesDetail" component={SalesDetails} />
       <Stack.Screen name="ReviewOrder" component={ReviewOrder} />
       <Stack.Screen name="AddPayment" component={AddPayment} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />

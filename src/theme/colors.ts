@@ -43,6 +43,7 @@ export const colors = {
   headerBackground: primary,
   backgroundColor: 'rgb(250,250,250)',
   backgroundColor2: '#012E3C',
+  background:'#01232D',
   danger: 'rgb(255,0,90)',
   error: 'red',
   info: primary,
@@ -50,4 +51,5 @@ export const colors = {
   warning: '#8a5d33',
   heart: 'rgb(204,61,92)',
   disabledText: 'rgba(50,50,50,0.4)',
+  text:'#212121',text2:'#202020'
 };

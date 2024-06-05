@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {IconButton} from 'react-native-paper';
+import { colors } from '~/theme';
 
 export const NotificationContent = () => {
   return (
@@ -12,7 +13,7 @@ export const NotificationContent = () => {
         since the 1500s
       </Text>
     </View>
-  );
+  )
 };
 
 const Notifications = (props: any) => {
@@ -52,13 +53,15 @@ export default Notifications;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#01232D',
-    paddingTop: 20,
+    // backgroundColor:colors.background,
+    paddingTop: 50,
   },
   container1: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
+    backgroundColor:colors.background,
+    marginBottom:10,
   },
   backArrowContainer: {
     flexDirection: 'row',
@@ -70,9 +73,11 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: '#012E3C',
-    borderRadius: 15,
-    marginHorizontal: 20,
+    borderRadius: 10,
+    marginHorizontal: 10,
     marginVertical: 5,
+    paddingHorizontal:12,
+    paddingVertical:4,
     flexDirection: 'row',
   },
   circle: {

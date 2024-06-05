@@ -13,6 +13,7 @@ import {useNavigation} from '@react-navigation/native';
 import HeaderNotification from '~/components/HeaderNotification';
 import {useSelector} from 'react-redux';
 import {GlobalMethod} from '../utils/GlobalMethod';
+import AppButton from '../components/AppButton'
 const AddCustomerScreen = props => {
   // console.log("GLOBAL DATA", GlobalMethod)
   const navigation = useNavigation();
@@ -158,14 +159,18 @@ const ExtraFormData = props => {
   return (
     <>
       {errorMessage && <HelperText type="error">{errorMessage}</HelperText>}
-      <Divider />
-      <Button
+      {/* <Divider /> */}
+      <AppButton
+        disabled={disabled}
+        onPress={onPress}
+      label= {pagesCount === pageIndex + 1 ? t('Save') : t('Continue')} />
+      {/* <Button
         disabled={disabled}
         onPress={onPress}
         style={styles.actionButton}
         mode="contained">
         {pagesCount === pageIndex + 1 ? t('Save') : t('Continue')}
-      </Button>
+      </Button> */}
     </>
   );
 };

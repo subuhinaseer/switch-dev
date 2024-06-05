@@ -21,6 +21,7 @@ import {
 } from '../redux/actions/AuthAction';
 import CheckBox from '@react-native-community/checkbox';
 import Toast from 'react-native-toast-message';
+import { colors } from '../theme';
 
 const LogoContainer = () => {
   return (
@@ -83,38 +84,82 @@ const Login = ({navigation}) => {
       [name]: value,
     });
   }
-
   const onLogin = async () => {
     try {
       if (!values.username || !values.password) {
         utils.toast(t('Username or password is required'));
         return;
       }
-      const loginCredntial = {
-        username: values.username.replace('+', ''),
-        password: values.password,
-      };
-      dispatch(loginRequest());
-      const response = await requests.post(url.auth.login, loginCredntial, {
-        withCredentials: false,
+      const loginCredential = {
+              // username: 255672475563,
+            username:  values.username.replace('+', ''),
+              // password: 'sapna1620'
+             password: values.password,
+            };
+      // const loginCredential = {
+      //   username: values.username.replace('+', ''),
+      //   password: values.password,
+      // };
+  
+      const response = await fetch('https://api-dev.switchafrica.io/api/v1/auth/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginCredential),
       });
-      console.log(response.data.non_field_errors[0], response.status);
-      if (response.ok && response.data.access) {
+  
+      const data = await response.json();
+  
+      if (response.ok && data.access) {
         utils.toast(t('Logged in successfully'));
-        dispatch(loginSuccess(response.data));
+        dispatch(loginSuccess(data));
         navigation.replace('dashboard');
       } else {
-        utils.toast(t('failed to login, Incorrect username or password'));
+        utils.toast(t('Failed to login, Incorrect username or password'));
       }
     } catch (error) {
       utils.toast(
-        t(
-          'Unable to process your request at this time. Please try again later',
-        ),
+        t('Unable to process your request at this time. Please try again later')
       );
-      console.log(error);
+      console.log(error,'i am error');
     }
-  }
+  };
+  
+
+  // const onLogin = async () => {
+  //   try {
+  //     if (!values.username || !values.password) {
+  //       utils.toast(t('Username or password is required'));
+  //       return;
+  //     }
+  //     const loginCredntial = {
+  //       username: 255672475563,
+  //       //values.username.replace('+', ''),
+  //       password: 'sapna1620'
+  //       //values.password,
+  //     };
+  //     // dispatch(loginRequest());
+  //     const response = await requests.post(url.auth.login, loginCredntial, {
+  //       // withCredentials: false,
+  //     });
+  //     console.log(response.data.non_field_errors[0], response.status);
+  //     if (response.ok && response.data.access) {
+  //       utils.toast(t('Logged in successfully'));
+  //       dispatch(loginSuccess(response.data));
+  //       navigation.replace('dashboard');
+  //     } else {
+  //       utils.toast(t('failed to login, Incorrect username or password'));
+  //     }
+  //   } catch (error) {
+  //     utils.toast(
+  //       t(
+  //         'Unable to process your request at this time. Please try again later',
+  //       ),
+  //     );
+  //     console.log(error);
+  //   }
+  // }
   const handleRememberMe = () => {
     setRememberMe(!rememberMe);
   }
@@ -134,12 +179,41 @@ const Login = ({navigation}) => {
           placeholder={t('Enter mobile number')}
           onChangeText={setValue('username')}
           style={{color:'#fff'}}
+
+        />
+      </View>
+      <View style={styles.InputPadding}>
+        <Input
+          label={'Username'}
+          style={{color:'#fff'}}
+          placeholder={'Enter username'}
+          secureTextEntry={false}
+          // mode={"flat"}
+          placeholderColor={"#aaa"}
+          textColor={colors.white}
+          inputStyle={{
+            backgroundColor: colors.background,
+            color: colors.white,
+            borderWidth: 1,
+            borderRadius: 10,
+            borderColor: '#D5EAF1',
+          }}
+          onChangeText={setValue('user')}
         />
       </View>
       <View style={styles.InputPadding}>
         <Input
           label={'Password'}
           style={{color:'#fff'}}
+          textColor={colors.white}
+          placeholderColor={"#aaa"}
+          inputStyle={{
+            backgroundColor: colors.background,
+            color: colors.white,
+            borderWidth: 1,
+            borderRadius: 10,
+            borderColor: '#D5EAF1',
+          }}
           placeholder={'Enter password'}
           secureTextEntry={false}
           inputType={"password"}

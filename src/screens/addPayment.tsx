@@ -183,7 +183,7 @@ const AddPayment = ({navigation}: any) => {
         <RadioButton.Group
           onValueChange={newValue => setChecked(newValue)}
           value={checked}>
-          <View>
+          <View style={{backgroundColor:'red'}}>
             <RadioButton.Group
               onValueChange={newValue => setChecked(newValue)}
               value={checked}>

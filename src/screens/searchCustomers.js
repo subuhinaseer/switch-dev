@@ -17,6 +17,8 @@ import {useFetchData} from '../effects';
 import {useSelector, useDispatch} from 'react-redux';
 import {GlobalMethod} from '../utils/GlobalMethod';
 import {selectCustomer} from '../redux/actions/SaleAction';
+import {colors} from '../theme';
+import AppButton from '../components/AppButton';
 
 const SearchCustomers = ({navigation}: any) => {
   const user = useSelector(e => e.user.user);
@@ -89,6 +91,8 @@ const SearchCustomers = ({navigation}: any) => {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
+          backgroundColor: '#01232D',
+          marginBottom: 10,
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <IconButton
@@ -103,181 +107,204 @@ const SearchCustomers = ({navigation}: any) => {
           {t('Cancel')}
         </Button>
       </View>
-      <View>
-        <Searchbar
-          placeholder="Search by customer name, Email Id"
-          placeholderTextColor={'#D5EAF1'}
-          onChangeText={onChangeSearch}
-          value={searchQuery}
-          mode="view"
-          icon={require('../assets/searchButtonIcon.png')}
-          style={styles.searchBar}
-          showDivider={false}
-          inputStyle={styles.placeHolder}
-          theme={{colors: {primary: '#D5EAF1'}}}
-          iconColor="#2A677A"
-        />
-      </View>
-      <View
-        style={{
-          borderWidth: 1,
-          borderColor: '#F6B100',
-          padding: 30,
-          borderRadius: 15,
-          marginVertical: 10,
-          backgroundColor: '#012E3C',
-        }}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View
-            style={{
-              height: 20,
-              width: 20,
-              backgroundColor: '#2A677A',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 10,
-            }}>
-            <Image
-              source={require('../assets/customerIcon.png')}
-              resizeMode="contain"
-            />
-          </View>
-          <Text style={{color: '#D5EAF1', paddingHorizontal: 5}}>
-            Customers
-          </Text>
+      <View style={{paddingHorizontal: 10, flex: 1}}>
+        <View>
+          <Searchbar
+            placeholder="Search by customer name, Email Id"
+            placeholderTextColor={colors.text}
+            onChangeText={onChangeSearch}
+            value={searchQuery}
+            mode="view"
+            icon={require('../assets/searchButtonIcon.png')}
+            style={styles.searchBar}
+            showDivider={false}
+            inputStyle={styles.placeHolder}
+            theme={{colors: {primary: '#D5EAF1'}}}
+            iconColor={colors.background}
+          />
         </View>
         <View
           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            paddingTop: 10,
+            borderWidth: 2,
+            borderColor:colors.backgroundColor2,
+            // borderColor: '#F6B100',
+            padding: 30,
+            borderRadius: 10,
+            marginVertical: 10,
+            // backgroundColor
+            // backgroundColor: '#012E3C',
           }}>
-          <Text style={{color: '#F6B100', fontSize: 32, fontWeight: 'bold'}}>
-            {data.result == undefined ? 0 : data.result.count}
-          </Text>
-          <Button
-            buttonColor="#2A677A"
-            style={{borderRadius: 4}}
-            labelStyle={{color: '#F6B100'}}
-            onPress={() => {
-              navigation.navigate('AddCustomer');
-            }}>
-            {t('Add Customer').toUpperCase()}
-          </Button>
-        </View>
-      </View>
-
-      <FlatList
-        data={data.result == undefined ? [] : data.result.results}
-        renderItem={({item}) => (
-          <View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <View
               style={{
-                flexDirection: 'row',
-                marginVertical: 10,
-                justifyContent: 'space-between',
+                height: 25,
+                width: 25,
+                // backgroundColor: '#2A677A',
+                borderWidth:1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 15,
               }}>
-              <View>
-                <Text style={{color: '#FFFFFF', fontSize: 14}}>
-                  {item.first_name} {item.last_name}
-                </Text>
-                <Text style={{color: '#FFFFFF', fontSize: 10}}>
-                  {item.business_name}
-                </Text>
-              </View>
-              <View
-                style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-                <Button
-                  style={styles.viewDetailButtonStyle}
-                  labelStyle={styles.viewDetailButtonLabelStyle}
-                  onPress={() => selectItem(item)}>
-                  View Detail
-                </Button>
-                <Button
-                  onPress={() => {
-                    dispatch(selectCustomer(item));
-                    navigation.navigate('CustomerAdded', {customer: item});
-                  }}
-                  labelStyle={styles.viewDetailButtonLabelStyle}
-                  style={styles.createSalesButtonStyle}>
-                  Create Sales
-                </Button>
-              </View>
+              <Image
+                source={require('../assets/customerIcon.png')}
+                resizeMode="contain"
+              />
             </View>
-            <Divider />
+            <Text style={{color: colors.text, paddingHorizontal: 5}}>
+              Customers
+            </Text>
           </View>
-        )}
-      />
-
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={-1}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}
-        handleStyle={{backgroundColor: '#012E3C'}}>
-        <View style={styles.bottomSheetMainContainer}>
           <View
             style={{
               flexDirection: 'row',
+              alignItems: 'center',
               justifyContent: 'space-between',
-              marginHorizontal: 20,
+              paddingTop: 10,
             }}>
-            <View style={{flexDirection: 'row'}}>
-              <View style={styles.avatarBackground}>
-                <Image
-                  source={require('../assets/avatar.png')}
-                  resizeMode="contain"
+            <Text style={{color:colors.link, fontSize: 32, fontWeight: 'bold'}}>
+              {data.result == undefined ? 0 : data.result.count}
+            </Text>
+            <Button
+              buttonColor="#01232D"
+              style={{borderRadius: 4}}
+              labelStyle={{color: '#F6B100'}}
+              onPress={() => {
+                navigation.navigate('AddCustomer');
+              }}>
+              {t('Add Customer').toUpperCase()}
+            </Button>
+          </View>
+        </View>
+
+        <FlatList
+          data={data.result == undefined ? [] : data.result.results}
+          renderItem={({item}) => (
+            <View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginVertical: 10,
+                  justifyContent: 'space-between',
+                  paddingHorizontal: 10,
+                }}>
+                <View>
+                  <Text style={{color: colors.text, fontSize: 14}}>
+                    {item.first_name} {item.last_name}
+                  </Text>
+                  <Text style={{color: colors.text2, fontSize: 10}}>
+                    {item.business_name}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-around',
+                  }}>
+                  <Button
+                    style={styles.viewDetailButtonStyle}
+                    labelStyle={[
+                      styles.viewDetailButtonLabelStyle,
+                      {color: colors.text},
+                    ]}
+                    onPress={() => selectItem(item)}>
+                    View Detail
+                  </Button>
+                  <Button
+                    onPress={() => {
+                      dispatch(selectCustomer(item));
+                      navigation.navigate('CustomerAdded', {customer: item});
+                    }}
+                    labelStyle={styles.viewDetailButtonLabelStyle}
+                    style={styles.createSalesButtonStyle}>
+                    Create Sales
+                  </Button>
+                </View>
+              </View>
+              <Divider />
+            </View>
+          )}
+        />
+
+        <BottomSheet
+          ref={bottomSheetRef}
+          index={-1}
+          snapPoints={snapPoints}
+          onChange={handleSheetChanges}
+          // handleStyle={{backgroundColor: '#012E3C'}}
+        >
+          <View style={styles.bottomSheetMainContainer}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginHorizontal: 20,
+              }}>
+              <View style={{flexDirection: 'row'}}>
+                <View style={styles.avatarBackground}>
+                  <Image
+                    source={require('../assets/avatar.png')}
+                    resizeMode="contain"
+                  />
+                </View>
+                <Text style={styles.nameStyle}>
+                  {selectedItem?.first_name} {selectedItem?.last_name}
+                </Text>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <IconButton
+                  icon={require('../assets/editIcon.png')}
+                  iconColor={colors.backgroundColor2}
+                  size={13}
+                />
+                <IconButton
+                  icon={require('../assets/crossButton.png')}
+                  iconColor={colors.backgroundColor2}
+                  // iconColor="#AAD2DF"
+                  size={13}
+                  onPress={closeBottomSheet}
                 />
               </View>
-              <Text style={styles.nameStyle}>
-                {selectedItem?.first_name} {selectedItem?.last_name}
+            </View>
+            <View style={{marginHorizontal: 20,marginBottom:15}}>
+              <Text style={styles.textStyle}>
+                Customer Name - {selectedItem?.first_name}{' '}
+                {selectedItem?.last_name}
+              </Text>
+              <Text style={styles.textStyle}>
+                Email Address - {selectedItem?.email}
+              </Text>
+              <Text style={styles.textStyle}>
+                Mobile Number - {selectedItem?.mobile}
+              </Text>
+              <Text style={styles.textStyle}>
+                Business Name - {selectedItem?.business_name}
+              </Text>
+              <Text style={styles.textStyle}>TIN - {selectedItem?.tin}</Text>
+              <Text style={styles.textStyle}>
+                Business Sector - {selectedItem?.business_sector?.name}
               </Text>
             </View>
-            <View style={{flexDirection: 'row'}}>
-              <IconButton
-                icon={require('../assets/editIcon.png')}
-                iconColor="#AAD2DF"
-                size={13}
+            <View style={{flex:1,justifyContent:"flex-end"}}>
+
+            <AppButton
+              onPress={() => {
+                navigation.navigate('CustomerAdded', {customer: selectedItem});
+              }}
+              label={'Choose'}
               />
-              <IconButton
-                icon={require('../assets/crossButton.png')}
-                iconColor="#AAD2DF"
-                size={13}
-                onPress={closeBottomSheet}
-              />
-            </View>
+              </View>
+            {/* <Chip
+              mode="flat"
+              style={styles.buttonStyle}
+              textStyle={styles.buttonTextStyle}
+              onPress={() => {
+                navigation.navigate('CustomerAdded', {customer: selectedItem});
+              }}>
+              Choose
+            </Chip> */}
           </View>
-          <View style={{marginHorizontal: 20}}>
-            <Text style={styles.textStyle}>
-              Customer Name - {selectedItem?.first_name}{' '}
-              {selectedItem?.last_name}
-            </Text>
-            <Text style={styles.textStyle}>
-              Email Address - {selectedItem?.email}
-            </Text>
-            <Text style={styles.textStyle}>
-              Mobile Number - {selectedItem?.mobile}
-            </Text>
-            <Text style={styles.textStyle}>
-              Business Name - {selectedItem?.business_name}
-            </Text>
-            <Text style={styles.textStyle}>TIN - {selectedItem?.tin}</Text>
-            <Text style={styles.textStyle}>
-              Business Sector - {selectedItem?.business_sector?.name}
-            </Text>
-          </View>
-          <Chip
-            mode="flat"
-            style={styles.buttonStyle}
-            textStyle={styles.buttonTextStyle}
-            onPress={() => {
-              navigation.navigate('CustomerAdded', {customer: selectedItem});
-            }}>
-            Choose
-          </Chip>
-        </View>
-      </BottomSheet>
+        </BottomSheet>
+      </View>
     </SafeAreaView>
   );
 };
@@ -287,9 +314,9 @@ export default SearchCustomers;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#01232D',
+    // backgroundColor: '#eee',
     paddingTop: 20,
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
   },
   viewDetailButtonStyle: {
     borderWidth: 1,
@@ -305,11 +332,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#2A677A',
     borderRadius: 5,
-    backgroundColor: '#2A677A',
+    backgroundColor:colors.background
+    // backgroundColor: '#2A677A',
   },
   searchBar: {
-    backgroundColor: '#012E3C',
-    borderRadius: 15,
+    backgroundColor: '#eee',
+    borderColor: '#909090',
+    borderWidth: 1,
+    borderRadius: 8,
     height: 44,
     alignItems: 'center',
   },
@@ -319,7 +349,7 @@ const styles = StyleSheet.create({
   },
   bottomSheetMainContainer: {
     flex: 1,
-    backgroundColor: '#012E3C',
+    // backgroundColor: '#012E3C',
   },
   avatarBackground: {
     backgroundColor: '#2A677A',
@@ -332,12 +362,14 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   nameStyle: {
-    color: '#D5EAF1',
+    color:colors.text,
+    // color: '#D5EAF1',
     fontSize: 14,
     alignSelf: 'center',
   },
   textStyle: {
-    color: '#D5EAF1',
+    color:colors.text,
+    // color: '#D5EAF1',
     fontSize: 14,
     lineHeight: 30,
   },

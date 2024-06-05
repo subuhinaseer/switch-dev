@@ -4,7 +4,8 @@ import {Button, Chip, Divider, IconButton, Searchbar} from 'react-native-paper';
 import {UnsecuredTextBox} from '../components/Inputs';
 import {useSelector} from 'react-redux';
 import {SafeAreaView} from 'react-native-safe-area-context';
-
+import AppButton from '../components/AppButton'
+import { colors } from '~/theme';
 const CustomerAdded = ({route, navigation}: any) => {
   var customerExist = route.params;
   return (
@@ -14,8 +15,11 @@ const CustomerAdded = ({route, navigation}: any) => {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
+          backgroundColor:colors.background,
+          paddingVertical:10
+          // backgroundColor:colors.primary
         }}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{flexDirection: 'row', alignItems: 'center',}}>
           <IconButton
             icon={require('../assets/backArrowButton.png')}
             iconColor="#F6B100"
@@ -46,6 +50,7 @@ const CustomerAdded = ({route, navigation}: any) => {
           <View style={{alignItems: 'center'}}>
             <Image
               source={require('../assets/ellipse.png')}
+          
               resizeMode="contain"
             />
             <Text style={styles.whiteText}>Add Product {'\n'} & Review</Text>
@@ -62,7 +67,8 @@ const CustomerAdded = ({route, navigation}: any) => {
       </View>
       <Text
         style={{
-          color: '#FFFFFF',
+          // color: '#FFFFFF',
+          color:colors.text,
           fontWeight: 'bold',
           fontSize: 14,
           marginTop: 40,
@@ -88,7 +94,12 @@ const CustomerAdded = ({route, navigation}: any) => {
       <UnsecuredTextBox placeholder="11/05/2023" />
       {/* <UnsecuredTextBox placeholder="Order ID" /> */}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
+        <AppButton  onPress={() => {
+            navigation.navigate('AddProducts', {
+              customer: customerExist.customer,
+            });
+          }} label={'Next'} />
+        {/* <TouchableOpacity
           style={styles.updateButton}
           onPress={() => {
             navigation.navigate('AddProducts', {
@@ -96,7 +107,7 @@ const CustomerAdded = ({route, navigation}: any) => {
             });
           }}>
           <Text style={styles.update}>Next</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </SafeAreaView>
   );
@@ -107,24 +118,25 @@ export default CustomerAdded;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#01232D',
-    paddingTop: 20,
-    paddingHorizontal: 20,
+    // backgroundColor: '#01232D',
+    // paddingTop: 20,
+    // paddingHorizontal: 20,
   },
   yellowText: {
-    color: '#F6B100',
+    color: colors.success,
     fontSize: 12,
     paddingTop: 5,
   },
   whiteText: {
-    color: '#FFFFFF',
+    // color: '#FFFFFF',
+    color:colors.grey,
     fontSize: 12,
     paddingTop: 15,
   },
   buttonContainer: {
     flex: 1,
     justifyContent: 'flex-end',
-    alignSelf: 'center',
+    // alignSelf: 'center',
   },
   updateButton: {
     flex: 1,
@@ -143,17 +155,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   chipText: {
-    color: '#D5EAF1',
+    color:colors.text,
+    // color: '#D5EAF1',
     fontSize: 17,
   },
   chipStyle: {
-    backgroundColor: '#012E3C',
-    borderColor: '#78ADBE',
+    // backgroundColor: '#012E3C',
+    backgroundColor:'#eee',
+    // borderColor: '#78ADBE',
     height: 48,
     marginHorizontal: 20,
     marginBottom: 10,
     marginTop: 20,
     borderWidth: 1.5,
     borderRadius: 10,
+    justifyContent:'center'
   },
 });

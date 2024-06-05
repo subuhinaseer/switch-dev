@@ -9,6 +9,7 @@ import {TouchableHighlight} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {GlobalMethod} from '../utils/GlobalMethod';
 import {addItemToCart} from '../redux/actions/SaleAction.js';
+import { colors } from '~/theme';
 
 const SearchAssignment = ({navigation}: any) => {
   const user = useSelector(e => e.user.user);
@@ -58,6 +59,8 @@ const SearchAssignment = ({navigation}: any) => {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
+          backgroundColor:colors.background
+          // backgroundColor:colors.primary
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <IconButton
@@ -70,10 +73,12 @@ const SearchAssignment = ({navigation}: any) => {
         </View>
         <Button labelStyle={{color: '#F6B100', fontSize: 14}}>Cancel</Button>
       </View>
+      <View style={{paddingHorizontal:15,paddingTop:20}}>
+
       <View>
         <Searchbar
           placeholder="Search by product name"
-          placeholderTextColor={'#D5EAF1'}
+          placeholderTextColor={colors.text}
           onChangeText={onChangeSearch}
           value={searchQuery}
           mode="view"
@@ -81,7 +86,7 @@ const SearchAssignment = ({navigation}: any) => {
           style={styles.searchBar}
           showDivider={false}
           inputStyle={styles.placeHolder}
-          theme={{colors: {primary: '#D5EAF1'}}}
+          theme={{colors: {primary: colors.text}}}
           iconColor="#2A677A"
         />
       </View>
@@ -121,7 +126,7 @@ const SearchAssignment = ({navigation}: any) => {
             backgroundColor: '#012E3C',
             height: 500,
           }}>
-          <FlatList
+          {/* <FlatList
             ItemSeparatorComponent={
               Platform.OS !== 'android' &&
               (({highlighted}) => (
@@ -187,7 +192,7 @@ const SearchAssignment = ({navigation}: any) => {
                 </View>
               </TouchableHighlight>
             )}
-          />
+          /> */}
         </View>
       ) : (
         <View
@@ -199,7 +204,7 @@ const SearchAssignment = ({navigation}: any) => {
             backgroundColor: '#012E3C',
             height: 500,
           }}>
-          <FlatList
+          {/* <FlatList
             ItemSeparatorComponent={
               Platform.OS !== 'android' &&
               (({highlighted}) => (
@@ -264,9 +269,10 @@ const SearchAssignment = ({navigation}: any) => {
                 </View>
               </TouchableHighlight>
             )}
-          />
+          /> */}
         </View>
       )}
+      </View>
     </View>
   );
 };
@@ -276,9 +282,9 @@ export default SearchAssignment;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#01232D',
-    paddingTop: 20,
-    paddingHorizontal: 20,
+    // backgroundColor: '#01232D',
+    paddingTop: 50,
+    // paddingHorizontal: 20,
   },
   dividerStyle: {
     marginVertical: 10,
@@ -288,12 +294,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   priceStyle: {
-    color: '#D5EAF1',
+    // color: '#D5EAF1',
+    color:colors.text,
     fontSize: 10,
   },
   searchBar: {
-    backgroundColor: '#012E3C',
-    borderRadius: 15,
+    // backgroundColor: '#012E3C',
+    backgroundColor:'#eee',
+    borderWidth:1,
+    borderColor:'#72767d',
+    borderRadius: 8,
     height: 44,
     alignItems: 'center',
   },

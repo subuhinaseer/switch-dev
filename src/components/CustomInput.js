@@ -611,6 +611,9 @@ export default function Input(props) {
     errorMessage,
     containerStyle = {},
     mode = 'outlined',
+    inputStyle,
+    textColor=colors.text,
+    placeholderColor='rgba(0,0,0,0.8)',
     ...otherProps
   } = props;
   const [secureTextEntry, setSecureTextEntry] = useState(props.secureTextEntry);
@@ -618,7 +621,22 @@ export default function Input(props) {
   const toggleSecureTextEntry = () => {
     setSecureTextEntry(!secureTextEntry);
   };
-
+  const textInputTheme = {
+    colors: {
+      placeholder: placeholderColor,
+      text: 'white',
+      primary: colors.primary,
+      background: colors.backgroundColor,
+      //
+      primaryContainer: colors.white,
+      secondary: colors.black,
+      secondaryContainer: colors.white,
+      surface: colors.black, //text
+      onSurface: colors.black, //background
+      onSurfaceVariant: placeholderColor,
+      onSurfaceDisabled: colors.disabledText,
+    },
+  };
   switch (keyboardType) {
     case 'boolean':
       return <SwitchInput {...props} />;
@@ -670,12 +688,19 @@ export default function Input(props) {
             }
             secureTextEntry={secureTextEntry}
             {...otherProps}
-            textColor='#fff'
-            
-            activeOutlineColor='#01232D'
+            textColor={textColor}
+            activeOutlineColor="#01232D"
             placeholderTextColor={'#fff'}
-            style={{backgroundColor:"#01232D",color:'#fff',borderWidth:1,
-          borderRadius:10,borderColor:'#D5EAF1'}}
+            style={[
+              {
+                backgroundColor: colors.white,
+                color: colors.text,
+                borderWidth: 1,
+                borderRadius: 10,
+                borderColor: '#D5EAF1',
+              },
+              inputStyle,
+            ]}
           />
           {!!errorMessage && (
             <HelperText type="error" visible={!!errorMessage}>
@@ -687,22 +712,7 @@ export default function Input(props) {
   }
 }
 
-const textInputTheme = {
-  colors: {
-    placeholder: 'blue',
-    text: 'white',
-    primary: colors.primary,
-    background: colors.backgroundColor,
-    //
-    primaryContainer: colors.white,
-    secondary: colors.black,
-    secondaryContainer: colors.white,
-    surface: colors.black, //text
-    onSurface: colors.black, //background
-    onSurfaceVariant: 'rgba(0,0,0,0.8)',
-    onSurfaceDisabled: colors.disabledText,
-  },
-};
+
 
 const styles = StyleSheet.create({
   textOutline: {

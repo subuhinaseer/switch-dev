@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useRef} from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import {
   Image,
   ScrollView,
@@ -7,24 +7,28 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Button, Chip, Divider, IconButton, Searchbar} from 'react-native-paper';
-import {UnsecuredTextBox} from '../components/Inputs';
-
+import { Button, Chip, Divider, IconButton, Searchbar } from 'react-native-paper';
+import { UnsecuredTextBox } from '../components/Inputs';
+import { colors } from '~/theme';
+import AppButton from '../components/AppButton'
+import AddProductHeader from '../components/AddProductHeader'
 const TextHolder = () => {
   return <View />;
 };
 
-const AddProducts = ({route, navigation}: any) => {
+const AddProducts = ({ route, navigation }: any) => {
   const customerExist = route.params;
   return (
     <View style={styles.mainContainer}>
-      <View
+      {/* <View
         style={{
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
+          backgroundColor: colors.background,
+          // marginTop: 40
         }}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <IconButton
             icon={require('../assets/backArrowButton.png')}
             iconColor="#F6B100"
@@ -33,10 +37,13 @@ const AddProducts = ({route, navigation}: any) => {
               navigation.goBack();
             }}
           />
-          <Text style={{color: '#F6B100'}}>Create Sales</Text>
+          <Text style={{ color: '#F6B100' }}>Create Sales</Text>
         </View>
-        <Button labelStyle={{color: '#F6B100', fontSize: 14}}>Cancel</Button>
-      </View>
+        <Button labelStyle={{ color: '#F6B100', fontSize: 14 }}>Cancel</Button>
+      </View> */}
+      <AddProductHeader
+      title={"Create Sales"}
+       />
       <View>
         <View
           style={{
@@ -45,25 +52,25 @@ const AddProducts = ({route, navigation}: any) => {
             alignItems: 'center',
             marginTop: 30,
           }}>
-          <View style={{alignItems: 'center'}}>
+          <View style={{ alignItems: 'center' }}>
             <Image
               source={require('../assets/tickIcon.png')}
               resizeMode="contain"
             />
             <Text style={styles.yellowText}>Customer Detail</Text>
           </View>
-          <View style={{alignItems: 'center'}}>
+          <View style={{ alignItems: 'center' }}>
             <Image
               source={require('../assets/tickIcon.png')}
               resizeMode="contain"
             />
             <Text style={styles.yellowText}>Add Product & Review</Text>
           </View>
-          <View style={{alignItems: 'center'}}>
+          <View style={{ alignItems: 'center' }}>
             <Image
               source={require('../assets/ellipse.png')}
               resizeMode="contain"
-              style={{height: 13, width: 13}}
+              style={{ height: 13, width: 13 }}
             />
             <Text style={styles.whiteText}>Add Payment</Text>
           </View>
@@ -71,7 +78,8 @@ const AddProducts = ({route, navigation}: any) => {
       </View>
       <Text
         style={{
-          color: '#FFFFFF',
+          // color: '#FFFFFF',
+          color:colors.text,
           fontWeight: 'bold',
           fontSize: 14,
           marginTop: 40,
@@ -83,7 +91,7 @@ const AddProducts = ({route, navigation}: any) => {
         <Chip
           mode="outlined"
           textStyle={styles.chipText}
-          theme={{colors: {primary: '#012E3C'}}}
+          theme={{ colors: { primary: '#012E3C' } }}
           style={styles.chipStyle}
           onPress={() => {
             navigation.navigate('SearchAssignment');
@@ -95,18 +103,23 @@ const AddProducts = ({route, navigation}: any) => {
         <UnsecuredTextBox placeholder="Discount" />
         <UnsecuredTextBox placeholder="Selling Price" />
       </ScrollView>
-      <View style={{marginTop: 10, height: 120}}>
+      <View style={{ marginTop: 10, height: 120 }}>
         <Button style={styles.addMoreButton} labelStyle={styles.addMoreText}>
           Add More
         </Button>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
+          <AppButton
+            label={"Next"}
+            onPress={() => {
+              navigation.navigate('ReviewOrder');
+            }} />
+          {/* <TouchableOpacity
             style={styles.updateButton}
             onPress={() => {
               navigation.navigate('ReviewOrder');
             }}>
             <Text style={styles.update}>Next</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </View>
@@ -118,23 +131,24 @@ export default AddProducts;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#01232D',
-    paddingTop: 20,
-    paddingHorizontal: 20,
+    // backgroundColor: '#01232D',
+    // paddingTop: 20,
+    // paddingHorizontal: 20,
   },
   yellowText: {
-    color: '#F6B100',
+    color: colors.success,
     fontSize: 12,
     paddingTop: 5,
   },
   whiteText: {
-    color: '#FFFFFF',
+    color: colors.grey,
     fontSize: 12,
     paddingTop: 15,
   },
   buttonContainer: {
     flex: 1,
     justifyContent: 'flex-end',
+    paddingBottom:15
   },
   updateButton: {
     flex: 1,
@@ -167,17 +181,20 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   chipText: {
-    color: '#D5EAF1',
-    fontSize: 17,
+    // color: '#D5EAF1',
+    color: colors.text,
+    fontSize: 16,
   },
   chipStyle: {
-    backgroundColor: '#012E3C',
-    borderColor: '#78ADBE',
-    height: 48,
+    // backgroundColor: '#012E3C',
+    // borderColor: '#78ADBE',
+    height: 56,
     marginHorizontal: 20,
     marginBottom: 10,
     marginTop: 20,
     borderWidth: 1.5,
     borderRadius: 10,
+    backgroundColor: '#eee',
+    justifyContent: "center"
   },
 });

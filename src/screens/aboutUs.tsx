@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {IconButton} from 'react-native-paper';
+import { colors } from '~/theme';
 
 const AboutUs = ({navigation}:any) => {
   return (
@@ -58,7 +59,8 @@ export default AboutUs;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#01232D',
+    // backgroundColor: '#01232D',
+   
     paddingTop: 20,
   },
   aboutUsText: {
